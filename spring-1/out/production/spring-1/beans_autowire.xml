@@ -12,7 +12,7 @@
     <!--
     可以使用autowire属性指定自动装配的方式，
     byName 根据 bean 的名字和当前bean 的setter 风格的属性名自动装配，如有匹配，则自动装配，如没有，则不装配，值为空
-    bytype
+    byType 根据bean的类型和当前bean 的属性的类型进行自动装配
     -->
     <bean id="person" class="com.hujian.spring.autowire.Person"
            p:name="Tom" autowire="byType"

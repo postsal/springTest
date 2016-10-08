@@ -10,6 +10,7 @@
     <bean id="address2" p:street="DaZhongSi" parent="address"
     ></bean>
 
+    <!--spring允许用户通过 depends-on 属性来设定Bean前置依赖的Bean。前置依赖的Bean会在本Bean 实例化之前创建好-->
     <bean id="person" class="com.hujian.spring.autowire.Person"
           p:name="Tom" p:address-ref="address" depends-on="car"
     ></bean>

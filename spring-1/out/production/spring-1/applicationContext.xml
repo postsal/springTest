@@ -67,10 +67,10 @@
 
 
 
-    <!--通过 p 命名空间为 bean 的属性赋值，需要首先导入 p 命名空间-->
-    <bean id="person2" class="com.hujian.spring.collections.Person"
+    <!--通过 p 命名空间为 bean 的属性赋值，需要首先导入 p 命名空间,相对于传统的配置方式更加简洁-->
+    <!--<bean id="person2" class="com.hujian.spring.collections.Person"
           p:age="30" p:name="Queen" p:cars-ref="car2"
-    ></bean>
+    ></bean>-->
 
 
 

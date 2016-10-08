@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--配置Properties属性值-->
+    <bean id="dataSource" class="com.hujian.spring.beans.DataSource">
+        <property name="properties">
+            <props>
+                <!--使用props 和prop 子节点来为properties属性赋值-->
+                <prop key="user">root</prop>
+                <prop key="password">123456</prop>
+                <prop key="jdbcUrl">jdbc:mysql///test</prop>
+                <prop key="driverClass">com.mysql.jdbc.Driver</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--测试配置Map集合属性-->
+    <bean id="newPerson" class="com.hujian.spring.beans.NewPerson">
+        <property name="name" value="Rose"></property>
+        <property name="age" value="28"></property>
+        <property name="car">
+            <map>
+                <!--使用Map节点及map 的entry 子节点配置Map类型的成员变量-->
+                <entry key="AA" value-ref="car"></entry>
+                <entry key="BB" value-ref="car2"></entry>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 测试配置list集合属性-->
+    <bean id="person3" class="com.hujian.spring.collections.Person">
+        <property name="name" value="Mike"></property>
+        <property name="age" value="23"></property>
+        <property name="cars">
+            <list>
+                <bean class="com.hujian.spring.beans.Car">
+                    <constructor-arg value="Ford1" name="brand"></constructor-arg>
+                    <constructor-arg value="ChangAn" name="corp"></constructor-arg>
+                    <constructor-arg value="200000" name="price"></constructor-arg>
+                </bean>
+                <bean class="com.hujian.spring.beans.Car">
+                    <constructor-arg value="Ford2" name="brand"></constructor-arg>
+                    <constructor-arg value="ChangAn" name="corp"></constructor-arg>
+                    <constructor-arg value="200000" name="price"></constructor-arg>
+                </bean>
+                <bean class="com.hujian.spring.beans.Car">
+                    <constructor-arg value="Ford3" name="brand"></constructor-arg>
+                    <constructor-arg value="ChangAn" name="corp"></constructor-arg>
+                    <constructor-arg value="200000" name="price"></constructor-arg>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!--配置单例的集合bean，以供多个bean 进行引用-->
+    <!--<util:list id="cars">
+        <ref bean="car2"></ref>
+        <ref bean="car"></ref>
+    </util:list>
+    <bean id="person4" class="com.hujian.spring.collections.Person">
+        <property name="name" value="Jack"></property>
+        <property name="age" value="29"></property>
+        <property name="cars" value="cars"></property>
+    </bean>-->
+
+
+
+    <!--通过 p 命名空间为 bean 的属性赋值，需要首先导入 p 命名空间,相对于传统的配置方式更加简洁-->
+    <!--<bean id="person2" class="com.hujian.spring.collections.Person"
+          p:age="30" p:name="Queen" p:cars-ref="car2"
+    ></bean>-->
+
+
+
+    <bean id="person" class="com.hujian.spring.beans.Person">
+        <property name="name" value="Tom"></property>
+        <property name="age" value="18"></property>
+        <!--可以使用 property 的ref 属性来建立Bean之间的引用关系-->
+        <!--<property name="car" ref="car2"></property>-->
+        <!--也可以用 ref 元素来写
+            <property name="car" >
+                <ref>car2</ref>
+            </property>
+        -->
+        <!--内部bean-->
+        <property name="car">
+            <bean class="com.hujian.spring.beans.Car">
+                <constructor-arg value="Ford" name="brand"></constructor-arg>
+                <constructor-arg value="ChangAn" name="corp"></constructor-arg>
+                <constructor-arg value="200000" name="price"></constructor-arg>
+            </bean>
+        </property>
+
+    </bean>
+
+    <!--通过构造方法来配置Bean的属性-->
+    <bean id="car" class="com.hujian.spring.beans.Car">
+        <constructor-arg value="Audi" name="brand"></constructor-arg>
+        <constructor-arg value="ShangHai" name="corp"></constructor-arg>
+        <constructor-arg value="300000" name="price"></constructor-arg>
+    </bean>
+
+    <bean id="car2" class="com.hujian.spring.beans.Car">
+        <constructor-arg value="Audi" name="brand"></constructor-arg>
+        <!--如果字面包含特殊字符，可以用<![CDATA[。。。]]> 包裹起来 -->
+        <constructor-arg  name="corp">
+            <value><![CDATA[<ShangHai>]]></value>
+        </constructor-arg>
+        <!--属性值可以用value 子节点来配置-->
+        <constructor-arg  name="maxSpeed">
+            <value>240</value>
+        </constructor-arg>
+    </bean>
+
+        <!--配置bean
+            class:Bean的全类名，通过反射的方式在IOC 容器中创建Bean, 所以要求Bean中必须有无参的构造器。
+            id: 标识容器中的Bean，id的值是唯一的。
+            -->
+    <bean id="helloWorld" class="com.hujian.spring.beans.HelloWorld">
+        <property name="name2" value="Spring"></property>
+    </bean>
+</beans>

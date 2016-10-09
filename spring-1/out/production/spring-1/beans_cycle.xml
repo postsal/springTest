@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--设置init-method 和 destroy-method 属性为Bean制定初始化和销毁方法-->
+    <bean id="car" class="com.hujian.spring.cycle.Car" init-method="init" destroy-method="destroy">
+        <property name="brand" value="Audi"></property>
+    </bean>
+
+    <!--配置bean 的后置处理器-->
+    <bean class="com.hujian.spring.cycle.MyBeanPostprocessor"></bean>
+</beans>
